@@ -1,0 +1,39 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+ganados = [11,11,9,4,2,11,10,7,5,11,10,8,7,2,13,11,9,6,4,11,9,5,5,5,14,12,6,6]
+perdidos = [5,5,7,12,14,5,6,9,11,5,6,8,9,14,3,5,7,10,12,5,7,11,11,11,2,4,10,10]
+
+pct_gan = np.array(ganados)/(np.array(ganados)+np.array(perdidos))
+
+empatados = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+
+# Crear el histograma
+plt.hist(pct_gan, bins=5, edgecolor='black')
+plt.title('Porcentaje Ganados')
+plt.xlabel('Porcentaje')
+plt.ylabel('Partidos ganados')
+plt.show()
+
+hist, bins = np.histogram(pct_gan, bins=5)
+
+frecuencia_acumulada = np.cumsum(hist)
+
+# Calcular los puntos medios de los bins
+bin_centers = (bins[:-1] + bins[1:]) / 2
+
+# Crear el polígono de frecuencias
+plt.plot(bin_centers, hist, marker='o')
+plt.title('Polígono de Frecuencias de Temperaturas en San Luis Potosí (Últimos 5 Años)')
+plt.xlabel('Temperatura (°C)')
+plt.ylabel('Frecuencia')
+plt.grid(True)
+plt.show()
+
+# Crear la ojiva menor que
+plt.plot(bin_centers, frecuencia_acumulada, marker='o')
+plt.title('Ojiva Menor que de Temperaturas en San Luis Potosí (Últimos 5 Años)')
+plt.xlabel('Temperatura (°C)')
+plt.ylabel('Frecuencia Acumulada')
+plt.grid(True)
+plt.show()
